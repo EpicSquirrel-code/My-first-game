@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+		<title>"Guess the words game"</title>
+</head>
+<body>
+
+	<script> 
+		
+var words = ["lion",
+"fish",
+"elephant",
+"tiger",
+"cat",
+"dog",
+"duck",
+"goat",
+"donkey",
+"hen",
+"horse",
+"mouse",
+"sheep"];
+// тут я создал массив со словами, которые игра загадывает//
+var word = words[Math.floor(Math.random() * words.length)];
+
+var AnswerArray = [];
+for (var i = 0; i < word.length; i++) {
+	AnswerArray[i] = "_";
+}
+//тут массив ответов//
+var remainingLetters = word.length;
+var attempts = 5
+
+//начало игрового цикла//
+while (remainingLetters > 0) {
+	alert(AnswerArray.join(""));
+	var guess = prompt("Guess a letter or click Cancel to stop the game");
+	if (attempts > 0) alert("You have " + attempts + " attempts");
+	if (attempts === 0) alert("You have no attempts"); 
+	if (guess === null) {break}
+	if (attempts === 0) {break}
+	else if(guess.length !== 1) {
+		alert("Please enter a single letter");
+	} else {
+		for (var j = 0; j < word.length; j++) {
+			if (word[j] === guess) {
+				AnswerArray[j] = guess;
+				remainingLetters--;
+			} if (AnswerArray[j] !== guess) {
+				attempts--;
+			}
+//нужно каким-то способом заставить программу убирать одну попытку при неправильном вводе, а не весь массив
+		}
+	}
+
+}
+
+alert(AnswerArray.join(""));
+alert("Good job!");
+
+	</script>
+</body>
+</html>
